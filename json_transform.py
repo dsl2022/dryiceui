@@ -2,7 +2,8 @@ import datetime
 import json
 import re
 from datetime import datetime
-
+import time
+start_time = time.time()
 file_path = 'data.json'
 rfc3339_pattern= r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})(?:[+-]\d{2}:\d{2})?$'
 
@@ -119,10 +120,10 @@ def transform_json(data):
     return transformed_data
 
 
-
-
-# Transform the JSON data
-transformed_json = transform_json(json_data)
-transformed_json = convert_dynamodb_json(transformed_json)
-# Print the transformed JSON
-print(json.dumps(transformed_json, indent=2))
+if __name__ == '__main__':
+    # Transform the JSON data
+    transformed_json = transform_json(json_data)
+    transformed_json = convert_dynamodb_json(transformed_json)
+    # Print the transformed JSON
+    print(json.dumps(transformed_json, indent=2))
+    print("--- %s seconds ---" % (time.time() - start_time))
